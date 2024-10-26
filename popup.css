@@ -59,16 +59,21 @@ body {
 
 #food-options {
     /* gap: 12px; */
-    border-color: #dfad1f;
+    /* border-color: #dfad1f;
     border-width: medium;
     border-style: solid;
-    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2); */
 }
 
 .food-item {
     max-width: 40px;
     max-height: 40px;
     cursor: pointer;
+    border-color: #dfad1f;
+    border-width: medium;
+    border-style: solid;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #controls {
