@@ -3,13 +3,38 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 10px;
     width: 200px;
-    /* height: 180px; */
+    height: 200px;
     background-image: url(images/background.jpg);
     background-size: cover;
-    /* background-size: 200px 220px; */
+}
 
+/* credit for the speech-bubble: https://projects.verou.me/bubbly/ */
+.speech-bubble {
+    position: relative;
+    background: #fa89b3;
+    padding: 5px 10px;
+    border-radius: 7px;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    /* border-color: black; */
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-top-color: #fa89b3;
+	border-bottom: 0;
+	margin-left: -19px;
+	margin-bottom: -10px;
 }
 
 #pet-container {
@@ -19,29 +44,25 @@ body {
     align-items: center;
 }
 
-#pet-container p {
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    margin: 0 0 4px 0;
-    font-size: 14px;
-    text-align: center;
-}
-
 #pet:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
 }
 
-.hidden {
-    display: none;
+.button {
+    background: #fcc62e;
+    padding: 5px 5px;
+    border-radius: 6px;
+    border-color: #dfad1f;
+    border-width: medium;
 }
-  
+
 #food-options {
-    display: none;
-    gap: 12px;
-    margin-top: 10px;
+    /* gap: 12px; */
+    border-color: #dfad1f;
+    border-width: medium;
+    border-style: solid;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
 }
 
 .food-item {
