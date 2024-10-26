@@ -1,0 +1,12 @@
+{
+    "manifest_version": 3,
+    "name": "Virtual Pet",
+    "version": "1.0",
+    "description": "A virtual pet you can pet and feed!",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "images/all pets.png"
+    },
+    "permissions": []
+  }
+  
