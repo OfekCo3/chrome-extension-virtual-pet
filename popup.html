@@ -9,7 +9,7 @@
 <body>
   <div id="pet-container">
     <div id="speech-bubble" class="speech-bubble"></div>
-    <img id="pet" src="images/pets/cat.png" alt="Your pet" width="100px">
+    <img id="pet" src="images/pets/cat.png" alt="Your pet">
   </div>
   <div id="controls">
     <button id="feed-button" class="button">Feed</button>
@@ -17,11 +17,20 @@
 
   </div>
   <div id="food-options">
-    <img src="images/vegetables/carrot.png" alt="Carrot" class="food-item">
-    <img src="images/vegetables/broccoli.png" alt="Broccoli" class="food-item">
-    <img src="images/vegetables/corn.png" alt="Corn" class="food-item">
-    <img src="images/vegetables/eggplant.png" alt="Eggplant" class="food-item">
+    <img src="images/vegetables/carrot.png" id="Carrot" class="food-item">
+    <img src="images/vegetables/broccoli.png" id="Broccoli" class="food-item">
+    <img src="images/vegetables/corn.png" id="Corn" class="food-item">
+    <img src="images/vegetables/eggplant.png" id="Eggplant" class="food-item">
   </div>
+
+  <div id="pet-selection" class="pet-selection">
+    <button class="pet-button" data-pet="cat">Cat</button>
+    <button class="pet-button" data-pet="dog">Dog</button>
+    <button class="pet-button" data-pet="hamster">Hamster</button>
+    <!-- <button class="pet-button" data-pet="turtle">Turtle</button> -->
+    <button class="pet-button" data-pet="parrot">Parrot</button>
+    <button class="pet-button" data-pet="fish">Fish</button>
+  </div>  
   <script src="popup.js"></script>
 </body>
 </html>

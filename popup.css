@@ -44,6 +44,13 @@ body {
     align-items: center;
 }
 
+#pet {
+    max-height: 100px; 
+    max-width: 100px;
+    width: auto;
+    height: auto;
+}
+
 #pet:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
@@ -57,18 +64,19 @@ body {
     border-width: medium;
 }
 
-#food-options {
-    /* gap: 12px; */
-    border-color: #dfad1f;
-    border-width: medium;
-    border-style: solid;
-    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
-}
+/* #food-options {
+    gap: 12px;
+} */
 
 .food-item {
     max-width: 40px;
     max-height: 40px;
     cursor: pointer;
+    border-color: #dfad1f;
+    border-width: medium;
+    border-style: solid;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #controls {
@@ -88,4 +96,20 @@ body {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.pet-selection {
+    flex-direction: row;
+}
+  
+.pet-button {
+    display: block;
+    background-color: #fcc62e;
+    margin: 5px 0;
+    padding: 6px;
+    cursor: pointer;
+}
+  
+.pet-button:hover {
+    background-color: #dfad1f;
 }
