@@ -15,6 +15,12 @@ foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
+// Function to display/undisplay the menu buttons
+function displayMenuButtons(display) {
+    feedButton.style.display = display;
+    changePetButton.style.display = display;
+
+}
 // Function to set the speechBubble to regular text
 function setRegularSpeechBubbleText() {
     setTimeout(() => {
@@ -46,15 +52,12 @@ document.addEventListener("DOMContentLoaded", loadPetPreference);
 feedButton.addEventListener('click', () => {
     speechBubble.innerText = 'Please not broccoli!';
     if (foodOptions.style.display === "none") {
+        displayMenuButtons("none");
         foodOptions.style.display = "block";
-        feedButton.style.display = "none";
-        changePetButton.style.display = "none";
 
     } else {
         foodOptions.style.display = "none";
-        feedButton.style.display = "block";
-        changePetButton.style.display = "block";
-
+        displayMenuButtons("block");
     }
 });
 
@@ -70,17 +73,14 @@ for (let i = 0; i < foodItems.length; i++) {
         }
 
         foodOptions.style.display = "none";
-        feedButton.style.display = "block";
-        changePetButton.style.display = "block";
-
+        displayMenuButtons("block");
         setRegularSpeechBubbleText();
     });
 }
 
 // Toggle pet selection menu when "Change Pet" button is clicked
 changePetButton.addEventListener('click', () => {
-    feedButton.style.display = "none";
-    changePetButton.style.display = "none";
+    displayMenuButtons("none");
     petSelection.style.display = petSelection.style.display === "none" ? "flex" : "none";
 });
 
@@ -96,9 +96,7 @@ for (let i = 0; i < petButtons.length; i++) {
 
         // Hide the pet selection menu and display back feed and change pet buttons
         petSelection.style.display = "none";
-        feedButton.style.display = "block";
-        changePetButton.style.display = "block";
-
+        displayMenuButtons("block");
         setRegularSpeechBubbleText();
     });
 }

@@ -20,7 +20,6 @@ body {
     box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
     margin: 0 0 6px 0;
     font-size: 14px;
-    /* border-color: black; */
 }
 
 .speech-bubble:after {
@@ -101,6 +100,14 @@ body {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes swim {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
 }
 
 .pet-selection {
