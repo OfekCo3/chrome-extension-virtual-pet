@@ -1,4 +1,3 @@
-// const petImage = document.getElementById('pet');
 const feedButton = document.getElementById('feed-button');
 const changePetButton = document.getElementById('change-pet-button');
 const foodOptions = document.getElementById('food-options');
@@ -7,15 +6,23 @@ const speechBubble = document.getElementById('speech-bubble');
 const petImage = document.getElementById('pet');
 const petSelection = document.getElementById('pet-selection');
 const petButtons = document.getElementsByClassName('pet-button');
+const happinessBar = document.getElementById('happiness-bar');
 
-// const pets = ['cat', 'dog', 'hamster', 'turtle', 'parrot', 'fish'];
 const pets = ['cat', 'dog', 'hamster', 'parrot', 'fish'];
-
+let happinessLevel = 0; 
 foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
+// Function to update the happiness meter using Material UI's LinearProgress
+// function updateHappinessMeter(numberToIncrease) {
+//     happinessLevel += numberToIncrease; 
+//     if (happinessLevel > 100) happinessLevel = 100;
+//     saveHappinessMeter(happinessLevel);
+//     document.getElementById('happiness-level').innerText = 'Happiness: ' + happinessLevel + '%';
+// }
 
+// Function to change fish hover method
 function changeFishHoverToSwim(selectedPet) {
     petImage.classList.remove('fish');
     if (selectedPet === 'fish') {
@@ -26,7 +33,6 @@ function changeFishHoverToSwim(selectedPet) {
 function displayMenuButtons(display) {
     feedButton.style.display = display;
     changePetButton.style.display = display;
-
 }
 
 // Function to set the speechBubble to regular text
@@ -43,6 +49,13 @@ function savePetPreference(pet) {
     });
 }
 
+// Function to save the happiness meter in Chrome storage
+function saveHappinessMeter(happinesMeterPrecentage) {
+    chrome.storage.sync.set({ happinesMeter: happinesMeterPrecentage }, () => {
+        console.log(`Happines meter saved: ${happinesMeterPrecentage}`);
+    });
+}
+
 // Function to load the saved pet preference from Chrome storage
 function loadPetPreference() {
     chrome.storage.sync.get("selectedPet", (result) => {
@@ -54,8 +67,17 @@ function loadPetPreference() {
     });
 }
 
+// Function to load the happiness meter precetange from Chrome storage
+function loadHappinessMeter() {
+    chrome.storage.sync.get("happinesMeter", (result) => {
+        const happinesMeter = result.happinesMeter || 0; // Default to 0 if nothing is saved
+        updateHappinessMeter(happinesMeter);
+    });
+}
+
 // Load the pet preference when the extension opens
 document.addEventListener("DOMContentLoaded", loadPetPreference);
+document.addEventListener("DOMContentLoaded", loadHappinessMeter);
 
 // Show or hide food options when the "Feed" button is clicked
 feedButton.addEventListener('click', () => {
@@ -81,6 +103,7 @@ for (let i = 0; i < foodItems.length; i++) {
             speechBubble.innerText = 'Tasty!';
         }
 
+        // updateHappinessMeter(10);
         foodOptions.style.display = "none";
         displayMenuButtons("block");
         setRegularSpeechBubbleText();

@@ -11,6 +11,16 @@ body {
     background-size: cover;
 }
 
+#happiness-bar {
+    text-align: center;
+    height: 22px;
+    width: 100%;
+    background-color: #4caf50; 
+    border-radius: 8px;
+    transition: width 0.5s;
+    align-content: space-around;
+}
+
 /* credit for the speech-bubble: https://projects.verou.me/bubbly/ */
 .speech-bubble {
     position: relative;
