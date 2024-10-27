@@ -91,6 +91,13 @@ for (let i = 0; i < petButtons.length; i++) {
         petImage.src = `images/pets/${selectedPet}.png`;
         speechBubble.innerText = `Meet your new pet, ${selectedPet}!`;
 
+        // Remove the fish class from all pets
+        petImage.classList.remove('fish');
+        // If the selected pet is fish, add the fish class
+        if (selectedPet === 'fish') {
+            petImage.classList.add('fish');
+        }
+        
         // Save the selected pet preference
         savePetPreference(selectedPet);
 

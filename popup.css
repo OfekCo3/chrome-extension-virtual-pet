@@ -55,6 +55,10 @@ body {
     animation-iteration-count: infinite;
 }
 
+#pet.fish:hover {
+    animation: swim 0.5s infinite;
+}
+
 .button {
     background: #fcc62e;
     padding: 5px 5px;
