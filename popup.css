@@ -62,6 +62,11 @@ body {
     border-radius: 6px;
     border-color: #dfad1f;
     border-width: medium;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #dfad1f;
 }
 
 /* #food-options {
@@ -100,14 +105,18 @@ body {
 
 .pet-selection {
     flex-direction: row;
+    gap: 1.2px;
 }
   
 .pet-button {
     display: block;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
     background-color: #fcc62e;
+    border-radius: 8px;
     margin: 5px 0;
-    padding: 6px;
+    padding: 5px;
     cursor: pointer;
+    border-color: #dfad1f;
 }
   
 .pet-button:hover {

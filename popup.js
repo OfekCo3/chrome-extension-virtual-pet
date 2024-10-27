@@ -19,6 +19,7 @@ speechBubble.innerText = 'Mouse hover to pet!';
 
 // Show or hide food options when the "Feed" button is clicked
 feedButton.addEventListener('click', () => {
+    speechBubble.innerText = 'Please not broccoli!';
     if (foodOptions.style.display === "none") {
         foodOptions.style.display = "block";
         feedButton.style.display = "none";
