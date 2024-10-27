@@ -7,6 +7,8 @@
       "default_popup": "popup.html",
       "default_icon": "images/all pets.png"
     },
-    "permissions": []
-  }
+    "permissions": [
+      "storage"
+    ]
+}
   

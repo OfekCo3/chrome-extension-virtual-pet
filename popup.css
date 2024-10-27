@@ -20,7 +20,6 @@ body {
     box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
     margin: 0 0 6px 0;
     font-size: 14px;
-    /* border-color: black; */
 }
 
 .speech-bubble:after {
@@ -44,6 +43,13 @@ body {
     align-items: center;
 }
 
+#pet {
+    max-height: 100px; 
+    max-width: 100px;
+    width: auto;
+    height: auto;
+}
+
 #pet:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
@@ -55,20 +61,26 @@ body {
     border-radius: 6px;
     border-color: #dfad1f;
     border-width: medium;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #dfad1f;
 }
 
 #food-options {
-    /* gap: 12px; */
-    border-color: #dfad1f;
-    border-width: medium;
-    border-style: solid;
-    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    gap: 12px;
 }
 
 .food-item {
     max-width: 40px;
     max-height: 40px;
     cursor: pointer;
+    border-color: #dfad1f;
+    border-width: medium;
+    border-style: solid;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #controls {
@@ -88,4 +100,32 @@ body {
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes swim {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.pet-selection {
+    flex-direction: row;
+    gap: 1.2px;
+}
+  
+.pet-button {
+    display: block;
+    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fcc62e;
+    border-radius: 8px;
+    margin: 5px 0;
+    padding: 5px;
+    cursor: pointer;
+    border-color: #dfad1f;
+}
+  
+.pet-button:hover {
+    background-color: #dfad1f;
 }
