@@ -15,12 +15,20 @@ foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
+
+function changeFishHoverToSwim(selectedPet) {
+    petImage.classList.remove('fish');
+    if (selectedPet === 'fish') {
+        petImage.classList.add('fish');
+    }
+}
 // Function to display/undisplay the menu buttons
 function displayMenuButtons(display) {
     feedButton.style.display = display;
     changePetButton.style.display = display;
 
 }
+
 // Function to set the speechBubble to regular text
 function setRegularSpeechBubbleText() {
     setTimeout(() => {
@@ -41,6 +49,7 @@ function loadPetPreference() {
         const savedPet = result.selectedPet || "cat"; // Default to "cat" if nothing is saved
         petImage.src = `images/pets/${savedPet}.png`;
         speechBubble.innerText = `Welcome back!`;
+        changeFishHoverToSwim(savedPet);
         setRegularSpeechBubbleText();
     });
 }
@@ -90,14 +99,8 @@ for (let i = 0; i < petButtons.length; i++) {
         const selectedPet = event.target.getAttribute('data-pet');
         petImage.src = `images/pets/${selectedPet}.png`;
         speechBubble.innerText = `Meet your new pet, ${selectedPet}!`;
+        changeFishHoverToSwim(selectedPet);
 
-        // Remove the fish class from all pets
-        petImage.classList.remove('fish');
-        // If the selected pet is fish, add the fish class
-        if (selectedPet === 'fish') {
-            petImage.classList.add('fish');
-        }
-        
         // Save the selected pet preference
         savePetPreference(selectedPet);
 
