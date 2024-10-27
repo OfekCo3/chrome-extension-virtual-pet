@@ -10,12 +10,37 @@ const petButtons = document.getElementsByClassName('pet-button');
 
 // const pets = ['cat', 'dog', 'hamster', 'turtle', 'parrot', 'fish'];
 const pets = ['cat', 'dog', 'hamster', 'parrot', 'fish'];
-let currentPetIndex = 0;
 
 foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
+// Function to set the speechBubble to regular text
+function setRegularSpeechBubbleText() {
+    setTimeout(() => {
+        speechBubble.innerText = 'Mouse hover to pet!';
+    }, 1500);
+}
+
+// Function to save the selected pet in Chrome storage
+function savePetPreference(pet) {
+    chrome.storage.sync.set({ selectedPet: pet }, () => {
+        console.log(`Pet preference saved: ${pet}`);
+    });
+}
+
+// Function to load the saved pet preference from Chrome storage
+function loadPetPreference() {
+    chrome.storage.sync.get("selectedPet", (result) => {
+        const savedPet = result.selectedPet || "cat"; // Default to "cat" if nothing is saved
+        petImage.src = `images/pets/${savedPet}.png`;
+        speechBubble.innerText = `Welcome back!`;
+        setRegularSpeechBubbleText();
+    });
+}
+
+// Load the pet preference when the extension opens
+document.addEventListener("DOMContentLoaded", loadPetPreference);
 
 // Show or hide food options when the "Feed" button is clicked
 feedButton.addEventListener('click', () => {
@@ -48,9 +73,7 @@ for (let i = 0; i < foodItems.length; i++) {
         feedButton.style.display = "block";
         changePetButton.style.display = "block";
 
-        setTimeout(() => {
-            speechBubble.innerText = 'Mouse hover to pet!';
-        }, 1500);
+        setRegularSpeechBubbleText();
     });
 }
 
@@ -68,13 +91,14 @@ for (let i = 0; i < petButtons.length; i++) {
         petImage.src = `images/pets/${selectedPet}.png`;
         speechBubble.innerText = `Meet your new pet, ${selectedPet}!`;
 
+        // Save the selected pet preference
+        savePetPreference(selectedPet);
+
         // Hide the pet selection menu and display back feed and change pet buttons
         petSelection.style.display = "none";
         feedButton.style.display = "block";
         changePetButton.style.display = "block";
 
-        setTimeout(() => {
-            speechBubble.innerText = 'Mouse hover to pet!';
-        }, 1500);
+        setRegularSpeechBubbleText();
     });
 }
