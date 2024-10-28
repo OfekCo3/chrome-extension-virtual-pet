@@ -3,12 +3,56 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px;
+    padding-top: 0px;
     width: 200px;
-    height: 200px;
+    height: 250px;
     background-image: url(images/background.jpg);
     background-size: cover;
+}
+
+#happiness-container {
+    width: 100%;
+    background-color: #b5a993; 
+    border-radius: 8px;
+    overflow: hidden;
+    height: 15px;
+    position: relative;
+}
+
+#happiness-fill {
+    height: 100%;
+    width: 0;
+    background-color: #3ba936;
+    transition: width 0.5s ease;
+    /* height: 100%;
+    width: 0;
+    background-color: #3ba936;
+    transition: width 0.5s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; 
+    font-weight: bold;
+    font-size: 10px; */
+}
+
+#happiness-text {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    pointer-events: none; /* Ensures clicks pass through to the container */
+    /* position: absolute;
+    z-index: 1;
+    color: white; */
 }
 
 /* credit for the speech-bubble: https://projects.verou.me/bubbly/ */
@@ -53,6 +97,10 @@ body {
 #pet:hover {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
+}
+
+#pet.fish:hover {
+    animation: swim 0.5s infinite;
 }
 
 .button {
