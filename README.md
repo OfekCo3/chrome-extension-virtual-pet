@@ -6,6 +6,7 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 ### Features 🌟
 - **Multiple Pets**: Choose from five different pets to care for.
 - **Interactive**: Pet and feed your virtual pet for a delightful experience.
+- **Happiness Bar**: Your pet's happiness level is displayed as a bar, which increases when you feed it and decreases if it's not fed for a day.
 - **User-Saved Preferences**: The selected pet and preferences are stored, so that the next time you open the extension, it remembers your favorite pet choice.
 
 ### Installation 🚀
@@ -19,7 +20,8 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 ### Usage 🐶
 1. Click the Virtual Pet icon in your Chrome toolbar to open the extension.
 2. Choose your pet from the available options.
-3. Interact with your pet by clicking on the pet to pet it or feeding it through the available options.
+3. Interact with your pet by hovering on the pet to pet it or feeding it through the available options.
+4. Keep an eye on the happiness bar to ensure your pet stays happy!
 
 ### License 📄
 This project is licensed under the MIT License. See the LICENSE file for more details.
