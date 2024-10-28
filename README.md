@@ -26,3 +26,7 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 ### License 📄
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
+### Images
+<img width="180" alt="צילום מסך 2024-10-28 204316" src="https://github.com/user-attachments/assets/65b5bd02-930b-4ed2-a4e6-fcbeb9a9383c">
+<img width="179" alt="צילום מסך 2024-10-28 204617" src="https://github.com/user-attachments/assets/5f4c342f-f08f-4d11-82b8-08a29148d0ca">
+<img width="178" alt="צילום מסך 2024-10-28 204422" src="https://github.com/user-attachments/assets/5f65991f-b8e3-455b-9f12-c7ce736f2396">
