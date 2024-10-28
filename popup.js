@@ -65,9 +65,9 @@ function loadPetPreference() {
 function loadHappinessMeter() {
     chrome.storage.sync.get("happinessMeter", (result) => {
         happinessLevel = result.happinessMeter || 0; // Default to 0 if no saved value
-        updateHappinessMeter(happinessLevel);
+        // happinessLevel = 0;
+        updateHappinessText(happinessLevel);
     });
-    // happinessLevel = 0;
 }
 
 // Load the pet preference when the extension opens
