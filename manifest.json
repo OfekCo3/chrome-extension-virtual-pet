@@ -5,7 +5,7 @@
     "description": "A virtual pet you can pet and feed!",
     "action": {
       "default_popup": "popup.html",
-      "default_icon": "images/all pets.png"
+      "default_icon": "images/pets/cat.png"
     },
     "permissions": ["storage"]
 }
