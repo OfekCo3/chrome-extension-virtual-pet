@@ -16,6 +16,14 @@ foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
+// Load the saved pet preference and happiness level and check last feeding date on DOM content load
+document.addEventListener("DOMContentLoaded", () => {
+    loadPetPreference();
+    loadHappinessMeter();
+    checkLastFedDate();
+    gradualHappinessDecrease();
+});
+
 // Function to change fish hover method
 function changeFishHoverToSwim(selectedPet) {
     petImage.classList.remove('fish');
@@ -23,6 +31,7 @@ function changeFishHoverToSwim(selectedPet) {
         petImage.classList.add('fish');
     }
 }
+
 // Function to display/undisplay the menu buttons
 function displayMenuButtons(display) {
     feedButton.style.display = display;
@@ -70,10 +79,6 @@ function loadHappinessMeter() {
     });
 }
 
-// Load the pet preference when the extension opens
-document.addEventListener("DOMContentLoaded", loadPetPreference);
-document.addEventListener("DOMContentLoaded", loadHappinessMeter);
-
 // Show or hide food options when the "Feed" button is clicked
 feedButton.addEventListener('click', () => {
     foodOptions.style.display = foodOptions.style.display === "none" ? "block" : "none";
@@ -91,13 +96,21 @@ for (let foodItem of foodItems) {
         foodOptions.style.display = "none";
         displayMenuButtons("block");  
         setRegularSpeechBubbleText();
+        storeCurrentTime();
     });
 }
 
+// Store the current date in Chrome storage
+function storeCurrentTime() {
+    const currentDate = new Date().getTime();
+    chrome.storage.local.set({ lastFedDate: currentDate }, () => {
+        console.log("Feeding date saved.");
+    });
+}
 
 // Function to update the happiness meter
-function updateHappinessMeter(increaseBy) {
-    happinessLevel = Math.min(100, happinessLevel + increaseBy); 
+function updateHappinessMeter(boost) {
+    happinessLevel = Math.max(0, Math.min(100, happinessLevel + boost));
     updateHappinessText(happinessLevel);
     saveHappinessMeter(happinessLevel);
 }
@@ -130,4 +143,38 @@ for (let i = 0; i < petButtons.length; i++) {
         displayMenuButtons("block");
         setRegularSpeechBubbleText();
     });
+}
+
+// Helper function to reset happiness level to zero and update meter
+function resetHappiness() {
+    happinessLevel = 0;
+    updateHappinessMeter(0);
+}
+
+// Check last feeding time and set happiness to zero if over 24 hours
+function checkLastFedDate() {
+    chrome.storage.local.get('lastFedDate', (result) => {
+        const lastFedDate = result.lastFedDate;
+        const currentTime = new Date().getTime();
+        const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+        if (lastFedDate) {
+            const timeDiff = currentTime - lastFedDate;
+            if (timeDiff >= oneDay) {
+                resetHappiness(); 
+            }
+        } else {
+            resetHappiness();
+        }
+    });
+}
+
+// Decrease happiness by 1 every 60 seconds
+function gradualHappinessDecrease() {
+    setInterval(() => {
+        if (happinessLevel > 0) {
+            happinessLevel--;
+            updateHappinessMeter(0);
+        }
+    }, 60000);
 }
