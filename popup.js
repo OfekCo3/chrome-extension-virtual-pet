@@ -14,13 +14,12 @@ foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
 
-// Function to update the happiness meter using Material UI's LinearProgress
-// function updateHappinessMeter(numberToIncrease) {
-//     happinessLevel += numberToIncrease; 
-//     if (happinessLevel > 100) happinessLevel = 100;
-//     saveHappinessMeter(happinessLevel);
-//     document.getElementById('happiness-level').innerText = 'Happiness: ' + happinessLevel + '%';
-// }
+// Function to update the happiness meter
+function updateHappinessMeter(increaseBy) {
+    happinessLevel = Math.min(100, happinessLevel + increaseBy); 
+    document.getElementById('happiness-fill').style.width = happinessLevel + '%';
+    saveHappinessMeter(happinessLevel);
+}
 
 // Function to change fish hover method
 function changeFishHoverToSwim(selectedPet) {
@@ -49,10 +48,10 @@ function savePetPreference(pet) {
     });
 }
 
-// Function to save the happiness meter in Chrome storage
-function saveHappinessMeter(happinesMeterPrecentage) {
-    chrome.storage.sync.set({ happinesMeter: happinesMeterPrecentage }, () => {
-        console.log(`Happines meter saved: ${happinesMeterPrecentage}`);
+// Save the happiness level to Chrome storage
+function saveHappinessMeter(level) {
+    chrome.storage.sync.set({ happinessMeter: level }, () => {
+        console.log(`Happiness level saved: ${level}%`);
     });
 }
 
@@ -67,12 +66,14 @@ function loadPetPreference() {
     });
 }
 
-// Function to load the happiness meter precetange from Chrome storage
+// Load the saved happiness meter from Chrome storage
 function loadHappinessMeter() {
-    chrome.storage.sync.get("happinesMeter", (result) => {
-        const happinesMeter = result.happinesMeter || 0; // Default to 0 if nothing is saved
-        updateHappinessMeter(happinesMeter);
-    });
+    // chrome.storage.sync.get("happinessMeter", (result) => {
+    //     happinessLevel = result.happinessMeter || 0; // Default to 0 if no saved value
+    // });
+    happinessLevel = 0;
+    document.getElementById('happiness-fill').style.width = happinessLevel + '%';
+
 }
 
 // Load the pet preference when the extension opens
@@ -80,35 +81,24 @@ document.addEventListener("DOMContentLoaded", loadPetPreference);
 document.addEventListener("DOMContentLoaded", loadHappinessMeter);
 
 // Show or hide food options when the "Feed" button is clicked
+// Add click event listeners to each food item
+// Update happiness when feeding pet
 feedButton.addEventListener('click', () => {
+    foodOptions.style.display = foodOptions.style.display === "none" ? "block" : "none";
+    if (foodOptions.style.display === "block") displayMenuButtons("none");
     speechBubble.innerText = 'Please not broccoli!';
-    if (foodOptions.style.display === "none") {
-        displayMenuButtons("none");
-        foodOptions.style.display = "block";
 
-    } else {
-        foodOptions.style.display = "none";
-        displayMenuButtons("block");
+    for (let foodItem of foodItems) {
+        foodItem.addEventListener('click', () => {
+            const happinessBoost = (foodItem.id === 'Broccoli') ? 5 : 10; // Lesser boost for disliked food
+            updateHappinessMeter(happinessBoost);
+            speechBubble.innerText = foodItem.id === 'Broccoli' ? 'Ew!' : 'Tasty!';
+            foodOptions.style.display = "none";
+            displayMenuButtons("block");  
+            setRegularSpeechBubbleText();
+        });
     }
 });
-
-// Add click event listeners to each food item
-for (let i = 0; i < foodItems.length; i++) {
-    const foodItem = foodItems[i];
-
-    foodItem.addEventListener('click', () => {
-        if (foodItem.id === 'Broccoli') {
-            speechBubble.innerText = 'Ew!';
-        } else {
-            speechBubble.innerText = 'Tasty!';
-        }
-
-        // updateHappinessMeter(10);
-        foodOptions.style.display = "none";
-        displayMenuButtons("block");
-        setRegularSpeechBubbleText();
-    });
-}
 
 // Toggle pet selection menu when "Change Pet" button is clicked
 changePetButton.addEventListener('click', () => {
