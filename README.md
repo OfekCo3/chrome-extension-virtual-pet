@@ -24,7 +24,7 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 4. Keep an eye on the happiness bar to ensure your pet stays happy!
 
 ### License 📄
-This project is licensed under the MIT License. See the LICENSE file for more details.
+[Images taken from](http://www.freepik.com)
 
 ### Images
 <img width="180" alt="צילום מסך 2024-10-28 204316" src="https://github.com/user-attachments/assets/65b5bd02-930b-4ed2-a4e6-fcbeb9a9383c">
