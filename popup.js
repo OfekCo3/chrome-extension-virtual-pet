@@ -7,19 +7,14 @@ const petImage = document.getElementById('pet');
 const petSelection = document.getElementById('pet-selection');
 const petButtons = document.getElementsByClassName('pet-button');
 const happinessBar = document.getElementById('happiness-bar');
+const happinessFill = document.getElementById('happiness-fill');
+const happinessText = document.getElementById('happiness-text');
 
 const pets = ['cat', 'dog', 'hamster', 'parrot', 'fish'];
 let happinessLevel = 0; 
 foodOptions.style.display = "none";
 petSelection.style.display = "none";
 speechBubble.innerText = 'Mouse hover to pet!';  
-
-// Function to update the happiness meter
-function updateHappinessMeter(increaseBy) {
-    happinessLevel = Math.min(100, happinessLevel + increaseBy); 
-    document.getElementById('happiness-fill').style.width = happinessLevel + '%';
-    saveHappinessMeter(happinessLevel);
-}
 
 // Function to change fish hover method
 function changeFishHoverToSwim(selectedPet) {
@@ -68,12 +63,11 @@ function loadPetPreference() {
 
 // Load the saved happiness meter from Chrome storage
 function loadHappinessMeter() {
-    // chrome.storage.sync.get("happinessMeter", (result) => {
-    //     happinessLevel = result.happinessMeter || 0; // Default to 0 if no saved value
-    // });
-    happinessLevel = 0;
-    document.getElementById('happiness-fill').style.width = happinessLevel + '%';
-
+    chrome.storage.sync.get("happinessMeter", (result) => {
+        happinessLevel = result.happinessMeter || 0; // Default to 0 if no saved value
+        updateHappinessMeter(happinessLevel);
+    });
+    // happinessLevel = 0;
 }
 
 // Load the pet preference when the extension opens
@@ -81,24 +75,38 @@ document.addEventListener("DOMContentLoaded", loadPetPreference);
 document.addEventListener("DOMContentLoaded", loadHappinessMeter);
 
 // Show or hide food options when the "Feed" button is clicked
-// Add click event listeners to each food item
-// Update happiness when feeding pet
 feedButton.addEventListener('click', () => {
     foodOptions.style.display = foodOptions.style.display === "none" ? "block" : "none";
     if (foodOptions.style.display === "block") displayMenuButtons("none");
     speechBubble.innerText = 'Please not broccoli!';
-
-    for (let foodItem of foodItems) {
-        foodItem.addEventListener('click', () => {
-            const happinessBoost = (foodItem.id === 'Broccoli') ? 5 : 10; // Lesser boost for disliked food
-            updateHappinessMeter(happinessBoost);
-            speechBubble.innerText = foodItem.id === 'Broccoli' ? 'Ew!' : 'Tasty!';
-            foodOptions.style.display = "none";
-            displayMenuButtons("block");  
-            setRegularSpeechBubbleText();
-        });
-    }
 });
+
+// Add click event listeners to each food item
+// Update happiness when feeding pet
+for (let foodItem of foodItems) {
+    foodItem.addEventListener('click', () => {
+        const happinessBoost = (foodItem.id === 'Broccoli') ? 5 : 10; // Lesser boost for disliked food
+        updateHappinessMeter(happinessBoost);
+        speechBubble.innerText = foodItem.id === 'Broccoli' ? 'Ew!' : 'Tasty!';
+        foodOptions.style.display = "none";
+        displayMenuButtons("block");  
+        setRegularSpeechBubbleText();
+    });
+}
+
+
+// Function to update the happiness meter
+function updateHappinessMeter(increaseBy) {
+    happinessLevel = Math.min(100, happinessLevel + increaseBy); 
+    updateHappinessText(happinessLevel);
+    saveHappinessMeter(happinessLevel);
+}
+
+// Function to edit the text of the happiness bar
+function updateHappinessText(level) {
+    happinessFill.style.width = `${level}%`;
+    happinessText.textContent = `Happiness: ${level}%`;
+}
 
 // Toggle pet selection menu when "Change Pet" button is clicked
 changePetButton.addEventListener('click', () => {
