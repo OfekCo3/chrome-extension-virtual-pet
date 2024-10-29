@@ -27,6 +27,6 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 [Images taken from](http://www.freepik.com)
 [Speech bubble taken from](https://projects.verou.me/bubbly/)
 ### Images
-<img width="180" alt="צילום מסך 2024-10-28 204316" src="https://github.com/user-attachments/assets/65b5bd02-930b-4ed2-a4e6-fcbeb9a9383c">
-<img width="179" alt="צילום מסך 2024-10-28 204617" src="https://github.com/user-attachments/assets/5f4c342f-f08f-4d11-82b8-08a29148d0ca">
-<img width="178" alt="צילום מסך 2024-10-28 204422" src="https://github.com/user-attachments/assets/5f65991f-b8e3-455b-9f12-c7ce736f2396">
+<img width="176" alt="צילום מסך 2024-10-29 164014" src="https://github.com/user-attachments/assets/120a6d9a-9a20-499a-8e91-89b4e23c517e">
+<img width="179" alt="צילום מסך 2024-10-29 164116" src="https://github.com/user-attachments/assets/dde75373-43c4-4d72-b66c-798af9d24259">
+<img width="179" alt="צילום מסך 2024-10-29 163937" src="https://github.com/user-attachments/assets/878940a6-9ee2-4439-8972-24ba069c717c">
