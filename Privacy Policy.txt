@@ -1,0 +1,24 @@
+Privacy Policy for Virtual Pet Chrome Extension
+
+Last Updated: 29/10/2024
+
+Thank you for choosing the Virtual Pet Chrome Extension! This Privacy Policy outlines how we handle any user data associated with this extension. Please read it carefully to understand how your information is collected, used, and shared.
+
+1. Data Collection
+Our Virtual Pet Chrome Extension does not collect, store, or transmit any personal information or user data. The extension operates entirely on your device and uses only necessary local storage to enhance your experience (such as remembering your selected pet or pet interactions).
+
+2. Data Usage
+Since we do not collect user data, there is no information to be processed, analyzed, or stored on any external servers. All interactions with your virtual pet are handled locally on your device.
+
+3. Data Sharing
+As we do not collect any personal data, no information is shared with third parties. Your privacy is respected, and your interactions within the extension remain entirely private.
+
+4. Third-Party Links
+Our extension does not include any third-party links or integrations that would share data with outside parties.
+
+5. Changes to This Policy
+If there are any changes to this Privacy Policy, we will update this page to reflect them. We encourage users to check this page occasionally for any updates.
+
+6. Contact Us
+If you have any questions about this Privacy Policy, please contact us at ofekcohen3300@gmail.com.
+
