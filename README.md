@@ -10,12 +10,7 @@ Feed, pet, and interact with your adorable pets, including a cat, dog, hamster, 
 - **User-Saved Preferences**: The selected pet and preferences are stored, so that the next time you open the extension, it remembers your favorite pet choice.
 
 ### Installation 🚀
-
-1. Clone this repository:
-   git clone https://github.com/OfekCo3/chrome-extension-virtual-pet.git
-2. Open Chrome and navigate to chrome://extensions/.
-3. Enable "Developer mode" by toggling the switch in the upper-right corner.
-4. Click on "Load unpacked" and select the directory where you cloned this repository.
+[https://chromewebstore.google.com/detail/virtual-pet/laleojngmilnkgbhnklcbadjdflllfgi?authuser=0&hl=iw]
 
 ### Usage 🐶
 1. Click the Virtual Pet icon in your Chrome toolbar to open the extension.
