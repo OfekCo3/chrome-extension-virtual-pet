@@ -18,8 +18,13 @@
   </div>
 
   <div id="controls">
+    <button id="clean-button" class="button">Clean</button>
     <button id="feed-button" class="button">Feed</button>
-    <button id="change-pet-button" class="button">Change Pet</button>
+    <button id="play-button" class="button">Play</button>
+    <button id="change-pet-button" class="button">Pick Pet</button>
+    <button id="sleep-button" class="button">Sleep</button>
+    <button id="exit-clean-button" class="button" style="display: none;">All Clean!</button>
+    <button id="wake-up-button" class="button" style="display: none;">Wake Up</button>
 
   </div>
   <div id="food-options">
@@ -27,6 +32,17 @@
     <img src="images/vegetables/broccoli.png" id="Broccoli" class="food-item">
     <img src="images/vegetables/corn.png" id="Corn" class="food-item">
     <img src="images/vegetables/eggplant.png" id="Eggplant" class="food-item">
+  </div>
+
+  <div id="clean-options">
+    <div class="clean-tool" id="soap-tool">
+      <img src="images/soap.png" alt="Soap">
+      <span>Shower</span>
+    </div>
+    <div class="clean-tool" id="toothbrush-tool">
+      <img src="images/toothbrush.png" alt="Toothbrush">
+      <span>Brush</span>
+    </div>
   </div>
 
   <div id="pet-selection" class="pet-selection">
@@ -38,6 +54,11 @@
     <button class="pet-button" data-pet="fish">Fish</button>
   </div>  
 
+  <img id="soap" src="images/soap.png" alt="Soap" />
+  <img id="toothbrush" src="images/toothbrush.png" alt="Toothbrush" />
+  <div id="ball" class="play-item">🏀</div>
+  <div id="bubbles-toy" class="play-item">💙</div>
+  <div id="feather" class="play-item">🪶</div>
   <a href="https://github.com/OfekCo3/chrome-extension-virtual-pet">to the Repo</a>
 
   <script src="popup.js"></script>
