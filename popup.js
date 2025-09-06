@@ -12,10 +12,13 @@ const happinessText = document.getElementById('happiness-text');
 const soap = document.getElementById('soap');
 const showerButton = document.getElementById('shower-button');
 const exitShowerButton = document.getElementById('exit-shower-button');
+const sleepButton = document.getElementById('sleep-button');
+const wakeUpButton = document.getElementById('wake-up-button');
 const body = document.body;
 
 
-let mode = "default"; // possible values: "default", "shower", "feed", "pick-pet"
+let mode = "default"; // possible values: "default", "shower", "feed", "pick-pet", "sleep"
+let isSleeping = false;
 
 
 const pets = ['cat', 'dog', 'hamster', 'parrot', 'fish'];
@@ -29,6 +32,7 @@ speechBubble.innerText = 'Mouse hover to pet!';
 document.addEventListener("DOMContentLoaded", () => {
     loadPetPreference();
     loadHappinessMeter();
+    loadSleepMode();
     checkLastFedDate();
     gradualHappinessDecrease();
 });
@@ -44,6 +48,13 @@ function savePetPreference(pet) {
 function saveHappinessMeter(level) {
     chrome.storage.sync.set({ happinessMeter: level }, () => {
         console.log(`Happiness level saved: ${level}%`);
+    });
+}
+
+// Save sleep mode state to Chrome storage
+function saveSleepMode(sleeping) {
+    chrome.storage.sync.set({ isSleeping: sleeping }, () => {
+        console.log(`Sleep mode saved: ${sleeping}`);
     });
 }
 
@@ -67,6 +78,16 @@ function loadHappinessMeter() {
     });
 }
 
+// Load sleep mode state from Chrome storage
+function loadSleepMode() {
+    chrome.storage.sync.get("isSleeping", (result) => {
+        const wasSleeping = result.isSleeping || false;
+        if (wasSleeping) {
+            switchMode("sleep");
+        }
+    });
+}
+
 // Store the current date in Chrome storage
 function storeCurrentTime() {
     const currentDate = new Date().getTime();
@@ -87,7 +108,10 @@ function switchMode(newMode) {
     foodOptions.style.display = 'none';
     petSelection.style.display = 'none';
     exitShowerButton.style.display = 'none';
+    wakeUpButton.style.display = 'none';
     body.style.backgroundImage = "url('images/background.jpg')";
+    body.classList.remove('sleep-mode');
+    petImage.classList.remove('sleeping');
     displayMenuButtons("block");
 
     // Mode-specific behavior
@@ -102,6 +126,22 @@ function switchMode(newMode) {
     } else if (mode === "pick-pet") {
         petSelection.style.display = 'flex';
         displayMenuButtons("none");
+    } else if (mode === "sleep") {
+        isSleeping = true;
+        body.classList.add('sleep-mode');
+        petImage.classList.add('sleeping');
+        wakeUpButton.style.display = 'block';
+        displayMenuButtons("none");
+        speechBubble.innerText = 'Zzz...';
+        startSleepBubbles();
+        saveSleepMode(true);
+    }
+    
+    // Stop sleep bubbles when exiting sleep mode
+    if (mode !== "sleep") {
+        isSleeping = false;
+        stopSleepBubbles();
+        saveSleepMode(false);
     }
 }
 
@@ -119,12 +159,17 @@ function displayMenuButtons(display) {
     feedButton.style.display = display;
     changePetButton.style.display = display;
     showerButton.style.display = display;
+    sleepButton.style.display = display;
 }
 
 // Function to set the speechBubble to regular text
 function setRegularSpeechBubbleText() {
     setTimeout(() => {
-        speechBubble.innerText = 'Mouse hover to pet!';
+        if (mode === "sleep") {
+            speechBubble.innerText = 'Zzz...';
+        } else {
+            speechBubble.innerText = 'Mouse hover to pet!';
+        }
     }, 1500);
 }
 /***************** End Helpers section *****************/
@@ -207,12 +252,21 @@ function checkLastFedDate() {
     });
 }
 
-// Decrease happiness by 1 every 60 seconds
+// Decrease happiness by 1 every 60 seconds (slower when sleeping)
 function gradualHappinessDecrease() {
     setInterval(() => {
         if (happinessLevel > 0) {
-            happinessLevel--;
-            updateHappinessMeter(0);
+            // Happiness decreases slower when sleeping (every 2 minutes instead of 1)
+            if (mode === "sleep") {
+                // Only decrease every other time when sleeping
+                if (Math.random() < 0.5) {
+                    happinessLevel--;
+                    updateHappinessMeter(0);
+                }
+            } else {
+                happinessLevel--;
+                updateHappinessMeter(0);
+            }
         }
     }, 60000);
 }
@@ -243,14 +297,26 @@ document.addEventListener('mousemove', (e) => {
   soap.style.top = `${e.pageY - 20}px`;
 });
 
-// Add mouseenter event to pet image in shower mode
-// Create bubbles and update happiness when hovering over pet
+// Add mouseenter event to pet image for all modes
 petImage.addEventListener('mouseenter', () => {
-  if (!isShowerMode()) return;
-  createBubbles();
-  updateHappinessMeter(1);
-  speechBubble.innerText = "So fresh!";
-  setRegularSpeechBubbleText();
+  if (isShowerMode()) {
+    createBubbles();
+    updateHappinessMeter(1);
+    speechBubble.innerText = "So fresh!";
+    setRegularSpeechBubbleText();
+  } else if (mode === "sleep") {
+    speechBubble.innerText = 'Still sleepy...';
+    setTimeout(() => {
+      if (mode === "sleep") {
+        speechBubble.innerText = 'Zzz...';
+      }
+    }, 2000);
+  } else {
+    // Normal petting interaction
+    updateHappinessMeter(1);
+    speechBubble.innerText = 'Love you mommy!';
+    setRegularSpeechBubbleText();
+  }
 });
 
 // Create bubbles in the shower mode
@@ -267,3 +333,52 @@ exitShowerButton.addEventListener('click', () => {
 });
 
 /***************** End Shower section *****************/
+
+/***************** Sleep section *****************/
+// Sleep button click toggles mode
+sleepButton.addEventListener('click', () => {
+    switchMode(mode === "sleep" ? "default" : "sleep");
+});
+
+// Wake up button exits sleep mode
+wakeUpButton.addEventListener('click', () => {
+    isSleeping = false;
+    switchMode("default");
+    speechBubble.innerText = 'Good morning!';
+    setRegularSpeechBubbleText();
+});
+
+
+// Create ZZZ bubbles when sleeping
+function createSleepBubbles() {
+    if (mode !== "sleep") return;
+    
+    const zzzBubble = document.createElement('div');
+    zzzBubble.classList.add('zzz-bubble');
+    zzzBubble.innerText = 'Z';
+    zzzBubble.style.left = `${Math.random() * 50 + 75}px`;
+    zzzBubble.style.top = `${Math.random() * 30 + 80}px`;
+    document.body.appendChild(zzzBubble);
+    
+    // Remove bubble after animation
+    setTimeout(() => {
+        if (zzzBubble.parentNode) {
+            zzzBubble.parentNode.removeChild(zzzBubble);
+        }
+    }, 3000);
+}
+
+// Start sleep bubble generation when entering sleep mode
+let sleepBubbleInterval;
+function startSleepBubbles() {
+    if (sleepBubbleInterval) clearInterval(sleepBubbleInterval);
+    sleepBubbleInterval = setInterval(createSleepBubbles, 2000);
+}
+
+function stopSleepBubbles() {
+    if (sleepBubbleInterval) {
+        clearInterval(sleepBubbleInterval);
+        sleepBubbleInterval = null;
+    }
+}
+/***************** End Sleep section *****************/
