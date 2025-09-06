@@ -82,10 +82,12 @@ https://chromewebstore.google.com/detail/virtual-pet/laleojngmilnkgbhnklcbadjdfl
 - **Extension Development**: Created with ❤️ for pet lovers
 
 ## Screenshots 📸
+<img width="353" height="400" alt="צילום מסך 2025-09-06 222000" src="https://github.com/user-attachments/assets/8662db69-6118-4017-a8e5-44eabd4fdf00" />
+<img width="355" height="418" alt="צילום מסך 2025-09-06 221946" src="https://github.com/user-attachments/assets/362f73d9-60f3-4353-883b-d6f6ac051118" />
+<img width="353" height="417" alt="צילום מסך 2025-09-06 221925" src="https://github.com/user-attachments/assets/e1c64249-c99c-459d-98bc-27e09a726c34" />
+<img width="350" height="417" alt="צילום מסך 2025-09-06 221909" src="https://github.com/user-attachments/assets/46f5f3d6-5fee-46fb-af3a-72b0621e107d" />
+<img width="353" height="414" alt="צילום מסך 2025-09-06 221843" src="https://github.com/user-attachments/assets/8c2a62a3-f393-4bec-8f7f-b7f606cb3f98" />
 
-<img width="176" alt="Pet Selection" src="https://github.com/user-attachments/assets/120a6d9a-9a20-499a-8e91-89b4e23c517e">
-<img width="179" alt="Feeding Mode" src="https://github.com/user-attachments/assets/dde75373-43c4-4d72-b66c-798af9d24259">
-<img width="179" alt="Pet Interaction" src="https://github.com/user-attachments/assets/878940a6-9ee2-4439-8972-24ba069c717c">
 
 ---
 
