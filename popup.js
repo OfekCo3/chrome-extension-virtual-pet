@@ -43,7 +43,12 @@ speechBubble.innerText = 'Mouse hover to pet!';
 document.addEventListener("DOMContentLoaded", () => {
     loadPetPreference();
     loadHappinessMeter();
-    loadSleepMode();
+    
+    // Load sleep mode after a small delay to ensure everything else is loaded
+    setTimeout(() => {
+        loadSleepMode();
+    }, 100);
+    
     checkLastFedDate();
     gradualHappinessDecrease();
     startRandomChatter();
@@ -87,7 +92,7 @@ function loadHappinessMeter() {
     chrome.storage.sync.get("happinessMeter", (result) => {
         happinessLevel = result.happinessMeter || 0; // Default to 0 if no saved value
         updateHappinessText(happinessLevel);
-    });s
+    });
 }
 
 // Load sleep mode state from Chrome storage
@@ -95,6 +100,8 @@ function loadSleepMode() {
     chrome.storage.sync.get("isSleeping", (result) => {
         const wasSleeping = result.isSleeping || false;
         if (wasSleeping) {
+            // Set mode to default first to ensure switchMode works properly
+            mode = "default";
             switchMode("sleep");
         }
     });
@@ -445,8 +452,8 @@ exitCleanButton.addEventListener('click', () => {
 // Move cleaning tools with mouse
 document.addEventListener('mousemove', (e) => {
   if (isCleanShowerMode()) {
-    soap.style.left = `${e.pageX - 20}px`;
-    soap.style.top = `${e.pageY - 20}px`;
+  soap.style.left = `${e.pageX - 20}px`;
+  soap.style.top = `${e.pageY - 20}px`;
   } else if (isCleanBrushMode()) {
     toothbrush.style.left = `${e.pageX - 20}px`;
     toothbrush.style.top = `${e.pageY - 20}px`;
@@ -456,8 +463,8 @@ document.addEventListener('mousemove', (e) => {
 // Add mouseenter event to pet image for all modes
 petImage.addEventListener('mouseenter', () => {
   if (isCleanShowerMode()) {
-    createBubbles();
-    updateHappinessMeter(1);
+  createBubbles();
+  updateHappinessMeter(1);
     speechBubble.innerText = getPetDialogue('shower');
     setRegularSpeechBubbleText();
   } else if (isCleanBrushMode()) {
@@ -476,7 +483,7 @@ petImage.addEventListener('mouseenter', () => {
     // Normal petting interaction
     updateHappinessMeter(1);
     speechBubble.innerText = getPetDialogue('happy');
-    setRegularSpeechBubbleText();
+  setRegularSpeechBubbleText();
   }
 });
 
